@@ -47,6 +47,8 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	 <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>We use Bluetooth to identify your device.</string>
 	<false/>
 </dict>
 </plist>

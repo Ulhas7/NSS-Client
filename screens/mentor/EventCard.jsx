@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     padding: 10,
     shadowOpacity: 1,
     backgroundColor:"#b493ea",
-// elevation:50,
   },
   cardContent: {
     flexDirection: 'column',

@@ -40,7 +40,7 @@ const StudentList = (props) => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        setUsersData(data);
+        setUsersData(data.reverse());
       } else {
         console.error('Error getting data');
       }
@@ -51,7 +51,7 @@ const StudentList = (props) => {
 
   
   const handlePress = () => {
-    console.log('FAB Pressed');
+   navigation.navigate('AddStudentOption')
   };
 
   useEffect(() => {
@@ -66,6 +66,34 @@ const StudentList = (props) => {
         alignItems: 'center',
         width: '100%',
       }}>
+        <View style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          // height: '12%',
+          // width: '100%',
+          // backgroundColor: Color.secondary,
+        }}>
+      <View
+        style={{
+          // justifyContent: 'end',
+          // alignSelf: 'flex-end',
+          marginRight: '3px',
+          // height: '8%',
+          // width: '10%',
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('PicProfile');
+          }}>
+          <Image
+            style={styles.settingsIcon}
+            resizeMode="cover"
+            source={require('../../assets/tableruserfilled.png')}
+          />
+        </TouchableOpacity>
+      </View>
       <View
         style={{
           justifyContent: 'end',
@@ -85,6 +113,8 @@ const StudentList = (props) => {
           />
         </TouchableOpacity>
       </View>
+      </View>
+
       <View
         style={{
           justifyContent: 'start',
@@ -161,12 +191,14 @@ const StudentList = (props) => {
         onChangeText={(text) => setSearch(text)}
       />
       <View
-        contentContainerStyle={{ flexGrow: 1 }}
+        
         style={{
           width: '95%',
           height: "68%",
         }}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <ScrollView 
+         contentContainerStyle={{flexGrow:1}}
+         >
           {
             usersData.length > 0 ? (
               usersData.filter((item) => {
@@ -184,9 +216,11 @@ const StudentList = (props) => {
                   <View style={{
                     flex: 1
                   }}>
-                    <EventCard eventName={item.username} reccuring={item.rollNo} />
+                    <EventCard eventName={item.username} reccuring={item.rollNo} hours={item.hours}/>
                   </View>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={()=>{props.navigation.navigate('StudentProfile',{
+                    userData:item
+                  })}}>
                     <View>
                       <Text style={{
                         color: "black",

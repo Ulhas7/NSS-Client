@@ -24,6 +24,10 @@ import PicProfile from './screens/Pic/PicProfile';
 import StudentAttentEvent from './screens/mentor/StudentAttentEvent';
 import UploadImages from './screens/mentor/UploadImages';
 import EventGallery from './screens/Pic/EventGallery';
+import AddStudentOption from './screens/Pic/AddStudentOption';
+import AddSingleStudent from './screens/Pic/AddSingleStudent';
+import AddMentor from './screens/Pic/AddMentor';
+import StudentProfile from './screens/Pic/StudentProfile';
 
     
 
@@ -92,6 +96,10 @@ return(
           <stack.Screen name="StudentView" component={StudentView} />
           <stack.Screen name="AddEvent" component={AddEvent} />
           <stack.Screen name="EventGallery" component={EventGallery} />
+          <stack.Screen name="AddStudentOption" component={AddStudentOption} />
+          <stack.Screen name="AddSingleStudent" component={AddSingleStudent} />
+          <stack.Screen name="AddMentor" component={AddMentor} />
+          <stack.Screen name="StudentProfile" component={StudentProfile} />
           
           <stack.Screen name="PicProfile" component={PicProfile} />
           <stack.Screen name="StackNav" component={StackNav} />

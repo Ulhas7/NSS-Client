@@ -189,16 +189,18 @@ const AddEvent = () => {
 };
 const styles = StyleSheet.create({
   container:{
-    borderWidth: 0.5,
     borderRadius: 8,
     margin: 6,
+    backgroundColor:'#d8d4f8',
     justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10,
   },
   text:{  
     color: 'black',
     fontSize: 18,    
-    marginBottom: 10,
-    marginTop: 10,
+    marginBottom: 4,
+    marginTop: 4,
 
   },
   image1:{

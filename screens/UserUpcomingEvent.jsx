@@ -64,7 +64,7 @@ useEffect(()=>{
         
       }}
       >
-      <TouchableOpacity title="p" onPress={() => {
+      <TouchableOpacity onPress={() => {
             props.navigation.navigate('UserProfile', {
               name: props.route.params.name,
             }); // Navigate to HomeScreen when button is clicked

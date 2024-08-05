@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Image, ScrollView, Switch, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Text, Image, ScrollView, Switch, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
 
 const AddEvent = () => {
@@ -82,7 +82,9 @@ const AddEvent = () => {
       alert('Failed to create event');
     }
   };
-
+  const removeImage = (uri) => {
+    setImages(images.filter(image => image.uri !== uri));
+  };
   return (
     <ScrollView>
       <View
@@ -144,14 +146,43 @@ const AddEvent = () => {
         <TextInput style={styles.text}placeholder="Reccuring" value={reccuring} onChangeText={setReccuring} placeholderTextColor={'grey'}/>
         </TouchableOpacity>
         
-        <TouchableOpacity  onPress={pickImage} >
-        <Text style={styles.imageText}>Pick Images</Text>
+        <TouchableOpacity style={styles.image1} onPress={pickImage} >
+        <Text style={styles.imageText}>+ Upload Images</Text>
         </TouchableOpacity>
 
-        {images.map((image, index) => (
-          <Image key={index} source={{ uri: image.uri }} style={{ width: 100, height: 100 }} />
-        ))}
-        <Button title="Submit" onPress={handleSubmit} />
+        <View style={styles.imageContainer}>
+          {images.map((image, index) => (
+            <View key={index} style={styles.imageWrapper}>
+              <TouchableOpacity onPress={() => removeImage(image.uri)}>
+                <Image source={{ uri: image.uri }} style={styles.image} />
+                <Text style={styles.removeText}>X</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
+        <View>
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#3b1c6d',
+            padding: 10,
+            borderRadius: 18,
+            justifyContent: 'center',
+            margin: 10,
+          }}
+          onPress={handleSubmit}>
+          <Text
+            style={{
+              textAlign: 'center',
+              color: 'white',
+              fontSize: 18,
+              fontWeight: 'bold',
+              marginBottom: 10,
+              marginTop: 10,
+            }}>
+            Add Event
+          </Text>
+        </TouchableOpacity>
+      </View>
       </View>
     </ScrollView>
   );
@@ -170,9 +201,39 @@ const styles = StyleSheet.create({
     marginTop: 10,
 
   },
-  image:{
-   backgroundColor:"red"
+  image1:{
+
+   display:'flex',
+   alignItems:'center',
+   padding :10
     
-  }
+  },
+  imageText:{
+  color:"red",
+  fontSize:20
+    
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  imageWrapper: {
+    position: 'relative',
+    margin: 5,
+  },
+  image: {
+    width: 100,
+    height: 100,
+  },
+  removeText: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    color: 'red',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 2,
+    fontWeight: 'bold',
+  },
 });
 export default AddEvent;

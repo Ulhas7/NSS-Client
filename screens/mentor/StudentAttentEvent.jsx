@@ -54,7 +54,7 @@ const handleApprove=async(id)=>{
           width: '100%'
         }}>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          {assign.map((curElem, index) => (
+          {assign.length!==0?assign.map((curElem, index) => (
             <View key={index} style={{
               width: '95%',
               marginLeft: 10,
@@ -71,14 +71,17 @@ const handleApprove=async(id)=>{
             </View>
             <TouchableOpacity onPress={()=>handleApprove(curElem._id)}>
             <View style={{
-              justifyContent: 'center',
-              alignItems: 'center',
+                marginBottom: 50,
+              
               height: 80,
               backgroundColor: 'white',
               borderRadius: 8,
               borderWidth: 1,
               borderColor: 'gray',
               marginTop: 12,
+              display:'flex',
+                alignItems:"center",
+                justifyContent:"center"
             }}>
               <Text style={{
                 color:"black",
@@ -86,11 +89,25 @@ const handleApprove=async(id)=>{
                 fontSize: 14,
                 marginBottom: 10,
                 marginTop: 10,
+                
               }}>  Approve</Text>
             </View>
             </TouchableOpacity>
             </View>
-          ))}
+          )):
+          <View>
+            <Text style={{
+              textAlign: 'center',
+              color: 'black',
+              fontSize: 18,
+              fontWeight: 'bold',
+              marginBottom: 10,
+              marginTop: 10,
+            }}>
+            
+            No student raised Query yet? </Text>
+          </View>
+          }
         </ScrollView>
       </View>
     </View>

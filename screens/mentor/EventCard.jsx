@@ -14,7 +14,7 @@ const EventCard = ({ eventName, reccuring,hours }) => {
   
         }}>
         <Text style={styles.cardRecurring}>{reccuring}</Text>
-        <Text style={styles.cardRecurring}>{hours}:hrs</Text>
+        <Text style={styles.cardRecurring}>{hours} hrs</Text>
         </View>
       </View>
     </View>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     padding: 10,
     shadowOpacity: 1,
-    backgroundColor:"#fe00ff30",
+    backgroundColor:"#b493ea",
 // elevation:50,
   },
   cardContent: {

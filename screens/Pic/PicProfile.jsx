@@ -14,11 +14,6 @@ const PicProfile = (props) => {
   return (
     <View style={styles.settings}>
       <View style={styles.settings1}>
-        <View style={[styles.listItem, styles.listItemFlexBox]}>
-          <View style={styles.content}>
-            <Text style={[styles.title, styles.titleTypo]}>Change Name</Text> 
-          </View>    
-        </View>
         <View style={[styles.listItem1, styles.dividerIconSpaceBlock]}>
           <View style={styles.content}>
             <TouchableOpacity >
@@ -42,7 +37,7 @@ const PicProfile = (props) => {
           source={require("../../assets/avatar.png")}
         />
         <View style={styles.name}>
-          <Text style={styles.pranjalKole2302cs02}>{props.route.params.name}</Text>
+          <Text style={styles.pranjalKole2302cs02}>PIC</Text>
         </View>
       </View>
       

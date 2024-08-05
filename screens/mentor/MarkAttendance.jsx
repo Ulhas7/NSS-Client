@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, Pressable, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, Pressable, TouchableOpacity, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import EventCard from './EventCard';
-import CircularProgress from '../CircularProgress';
 
 const MarkAttendance = (props) => {
   const navigation = useNavigation();
   const [assign, setAssign] = useState([]);
-  const [hours, setHours] = useState({});
+  const [search, setSearch] = useState('');
   
   const getEvents = async () => {
     try {
@@ -27,29 +25,8 @@ const MarkAttendance = (props) => {
 
  
 
-  async function userAuthentication() {
-    const token = await AsyncStorage.getItem("token");
-    try {
-      const response = await fetch("https://nss-server-zunb.onrender.com/api/mentor/getData", {
-        method: "GET",
-        headers: {
-          Authorization: token,
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setHours(data);
-      } else {
-        console.error(response);
-      }
-    } catch (error) {
-      console.error("Error getting admin data");
-    }
-  };
-
+ 
   useEffect(() => {
-    userAuthentication();
     getEvents();
   }, []);
 
@@ -75,9 +52,7 @@ const MarkAttendance = (props) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate('MentorProfile',{
-              name:hours.name
-            }); // Navigate to HomeScreen when button is clicked
+            props.navigation.navigate('MentorProfile'); // Navigate to HomeScreen when button is clicked
           }}>
           <Image
             style={styles.settingsIcon}
@@ -97,7 +72,7 @@ const MarkAttendance = (props) => {
             fontSize: 30,
             color: 'black',
           }}>
-          Hey {hours?hours.name:""}!
+          Hey Mentor!
         </Text>
       </View>
       <View
@@ -105,20 +80,18 @@ const MarkAttendance = (props) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '20%',
+          height: '15%',
         }}>
         <TouchableOpacity
           style={{
             flex: 1,
-            // margin: 5,
+            margin: 5,
             backgroundColor: 'rgb(44 44 149)',
             borderRadius: 18,
             justifyContent: 'center',
           }}
           onPress={() => {
-            props.navigation.navigate('MarkAttendance', {
-              name: hours.email
-            }); // Navigate to HomeScreen when button is clicked
+            props.navigation.navigate('MarkAttendance'); // Navigate to HomeScreen when button is clicked
           }}>
           <Text
             style={{
@@ -136,6 +109,7 @@ const MarkAttendance = (props) => {
             flex: 1,
             backgroundColor: '#c5cacd',
             borderRadius: 18,
+            margin: 5,
           }}
           onPress={() => {
             props.navigation.navigate('UpdateEventPicture'); // Navigate to HomeScreen when button is clicked
@@ -153,6 +127,13 @@ const MarkAttendance = (props) => {
           </Text>
         </TouchableOpacity>
       </View>
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search by event name or wings"
+        placeholderTextColor={'black'}
+        value={search}
+        onChangeText={(text) => setSearch(text)}
+      />
       <View stye={{
           display: 'flex',
           flex: 1,
@@ -210,6 +191,16 @@ const styles = StyleSheet.create({
     height: 24,
     position: 'absolute',
     overflow: 'hidden',
+  },
+  searchInput: {
+    width: '90%',
+    height: '8%',
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    marginVertical: 10,
+    color: 'black',
   },
 });
 export default MarkAttendance;

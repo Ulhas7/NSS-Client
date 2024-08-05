@@ -225,7 +225,7 @@ useEffect(()=>{
                     reccuring={reccuring}
                     mentorid={mentorid}
                     userid={userid}
-                    images={images}
+                    images={images[0]}
                    />
         
                 </ScrollView>
@@ -249,7 +249,7 @@ useEffect(()=>{
                   reccuring={reccuring}
                   mentorid={mentorid}
                   userid={userid}
-                  images={images}
+                  images={images[0]}
                  />
       
               </ScrollView>

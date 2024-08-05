@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     color:"black"
   },
   timeDate: {
-    fontSize: 18,
+    fontSize: 15,
     color: '#2b242c',
     marginBottom: 10,
   },

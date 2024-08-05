@@ -2,35 +2,10 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import  { useState, useEffect } from 'react';
-// import RNFS from 'react-native-fs';
-// {reccuring,event,date,time,desc,hours,images,venue,organizer}
+
 const EventCard = ({ reccuring,event,date,time,desc,hours,images,venue,organizer,id,userid,mentorid }) => {
  const navigation=useNavigation();
-//  const [imagePath, setImagePath] = useState(null);
-//  const s3ImageUrl = images[0]; // Replace with your S3 image URL
 
-//  useEffect(() => {
-//    downloadImage();
-//  }, []);
-
-//  const downloadImage = async () => {
-//    try {
-//      const downloadDest = `${RNFS.DocumentDirectoryPath}/eventImg/${event}`;
-//      const options = {
-//        fromUrl: s3ImageUrl,
-//        toFile: downloadDest,
-//      };
-//      const result = await RNFS.downloadFile(options).promise;
-//      if (result.statusCode === 200) {
-//        setImagePath(downloadDest);
-//      } else {
-//        console.error('Failed to download image');
-//      }
-//    } catch (error) {
-//      console.error('Error downloading image:', error);
-//    }
-//  };
         const handlePress = () => {
           navigation.navigate('SpecificEvent', { reccuring,event,date,time,desc,hours,id,userid,mentorid,venue,organizer});
         };
@@ -39,8 +14,8 @@ const EventCard = ({ reccuring,event,date,time,desc,hours,images,venue,organizer
     onPress={handlePress}
     >
     
-      {/* <Image source={{ uri: images }} style={styles.image} /> */}
-      <Image source={require("../images/nsslogo.png")} style={styles.image} />
+      <Image source={{ uri: images }} style={styles.image} />
+      {/* <Image source={require("../images/nsslogo.png")} style={styles.image} /> */}
       <View style={styles.details}>
         <View style={styles.header}>
           <Text style={styles.eventName}>{event}</Text>

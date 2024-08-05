@@ -17,7 +17,6 @@ import EventCard from '../mentor/EventCard';
 
 const StudentList = (props) => {
   const navigation = useNavigation();
-  const [adminData, setAdminData] = useState({});
   const [usersData, setUsersData] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -50,39 +49,13 @@ const StudentList = (props) => {
     }
   };
 
-  const AdminData = async () => {
-    const token = await AsyncStorage.getItem('token');
-    console.log(token);
-    try {
-      const response = await fetch(
-        'https://nss-server-zunb.onrender.com/api/admin/admindata',
-        {
-          method: 'GET',
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      console.log(response);
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data.adminData);
-        setAdminData(data.adminData);
-      } else {
-        console.error('Error getting data');
-      }
-    } catch (error) {
-      console.error('Error getting');
-    }
-  };
-
+  
   const handlePress = () => {
     console.log('FAB Pressed');
   };
 
   useEffect(() => {
     UsersData();
-    AdminData();
   }, []);
 
   return (
@@ -103,9 +76,7 @@ const StudentList = (props) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate('PicProfile', {
-              name: adminData.email
-            });
+            props.navigation.navigate('PicProfile');
           }}>
           <Image
             style={styles.settingsIcon}
@@ -126,7 +97,7 @@ const StudentList = (props) => {
             fontSize: 30,
             color: 'black',
           }}>
-          Hey {adminData ? adminData.email : ""}!
+          Hey PIC!
         </Text>
       </View>
       <View

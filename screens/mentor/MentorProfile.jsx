@@ -11,14 +11,36 @@ const MentorProfile = (props) => {
     AsyncStorage.setItem('token', '');
     props.navigation.navigate('StackNav',{screen:"GetStarted"})
   }
+  const [hours, setHours] = React.useState({});
+  async function userAuthentication() {
+    const token = await AsyncStorage.getItem("token");
+    try {
+      const response = await fetch("https://nss-server-zunb.onrender.com/api/mentor/getData", {
+        method: "GET",
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setHours(data);
+      } else {
+        console.error(response);
+      }
+    } catch (error) {
+      console.error("Error getting admin data");
+    }
+  };
+
+  React.useEffect(() => {
+    userAuthentication();
+   
+  }, []);
   return (
     <View style={styles.settings}>
       <View style={styles.settings1}>
-        <View style={[styles.listItem, styles.listItemFlexBox]}>
-          <View style={styles.content}>
-            <Text style={[styles.title, styles.titleTypo]}>Change Name</Text> 
-          </View>    
-        </View>
+        
         <View style={[styles.listItem1, styles.dividerIconSpaceBlock]}>
           <View style={styles.content}>
             <TouchableOpacity >
@@ -42,7 +64,7 @@ const MentorProfile = (props) => {
           source={require("../../assets/avatar.png")}
         />
         <View style={styles.name}>
-          <Text style={styles.pranjalKole2302cs02}>{props.route.params.name}</Text>
+          <Text style={styles.pranjalKole2302cs02}>{hours.name}</Text>
         </View>
       </View>
       

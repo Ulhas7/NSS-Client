@@ -17,15 +17,10 @@ import EventCard from '../mentor/EventCard';
 
 const Events = (props) => {
   const navigation = useNavigation();
-  const [adminData, setAdminData] = useState({});
   const [usersData, setUsersData] = useState([]);
   const [search, setSearch] = useState('');
 
-  const signout = () => {
-    AsyncStorage.setItem('isLoggedInPic', '');
-    AsyncStorage.setItem('token', '');
-    props.navigation.navigate('StackNav', { screen: 'GetStarted' });
-  };
+
 
   const UsersData = async () => {
     const token = await AsyncStorage.getItem('token');
@@ -41,7 +36,7 @@ const Events = (props) => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        setUsersData(data);
+        setUsersData(data.reverse());
       } else {
         console.error('Error getting data');
       }
@@ -50,31 +45,7 @@ const Events = (props) => {
     }
   };
 
-  const AdminData = async () => {
-    const token = await AsyncStorage.getItem('token');
-    console.log(token);
-    try {
-      const response = await fetch(
-        'https://nss-server-zunb.onrender.com/api/admin/admindata',
-        {
-          method: 'GET',
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      console.log(response);
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data.adminData);
-        setAdminData(data.adminData);
-      } else {
-        console.error('Error getting data');
-      }
-    } catch (error) {
-      console.error('Error getting');
-    }
-  };
+ 
 
   const handlePress = () => {
     navigation.navigate('AddEvent')
@@ -83,7 +54,6 @@ const Events = (props) => {
   console.log(usersData);
   useEffect(() => {
     UsersData();
-    AdminData();
   }, []);
 
   return (
@@ -92,14 +62,14 @@ const Events = (props) => {
       <View style={{ justifyContent: 'end', alignSelf: 'flex-end', marginRight: '3px', height: '8%', width: '10%' }}>
         <TouchableOpacity
           onPress={() => {
-            props.navigation.navigate('PicProfile', { name: adminData.email });
+            props.navigation.navigate('PicProfile');
           }}>
           <Image style={styles.settingsIcon} resizeMode="cover" source={require('../../assets/settings.png')} />
         </TouchableOpacity>
       </View>
       <View style={{ justifyContent: 'start', width: '95%', height: '8%' }}>
         <Text style={{ fontWeight: '900', fontSize: 30, color: 'black' }}>
-          Hey {adminData ? adminData.email : ''}!
+          Hey PIC!
         </Text>
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: '8%' }}>
@@ -142,9 +112,16 @@ const Events = (props) => {
               })
               .map((item, index) => (
                 <View key={index} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                  <View style={{ flex: 1 }}>
-                    <EventCard eventName={item.event} reccuring={item.venue} />
-                  </View>
+                  <TouchableOpacity style={{ flex: 1 }} onPress={() => {
+    navigation.navigate('EventGallery',{
+      imagearray:item.images,
+      id:item._id
+    })
+  }}>
+                 
+                    <EventCard eventName={item.event} reccuring={item.venue} hours={item.hours}/>
+                
+                  </TouchableOpacity>
                   <TouchableOpacity>
                     <View>
                       <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 14, padding: 10 }}>
@@ -160,7 +137,7 @@ const Events = (props) => {
                 </View>
               ))
           ) : (
-            <Text>No User</Text>
+            <Text>No Event</Text>
           )}
         </ScrollView>
       </View>

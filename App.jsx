@@ -22,6 +22,8 @@ import SpecificEvent from './screens/SpecificEvent';
 import MentorProfile from './screens/mentor/MentorProfile';
 import PicProfile from './screens/Pic/PicProfile';
 import StudentAttentEvent from './screens/mentor/StudentAttentEvent';
+import UploadImages from './screens/mentor/UploadImages';
+import EventGallery from './screens/Pic/EventGallery';
 
     
 
@@ -36,15 +38,9 @@ const UserNav = () => {
       <Tab.Screen name="HoursCompleted" component={UserHour} />
       <Tab.Screen name="UpcomingEvent" component={UserUpcomingEvent} />
       <Tab.Screen name="AttendedEvent" component={UserAttemptEvent} />
-      <Tab.Screen name="UserProfile" component={UserProfile} options={{
-        headerShown: true,
-      }} />
-      <Tab.Screen name="SpecificEvent" component={SpecificEvent} options={{
-        headerShown: true,
-      }} />
+      <Tab.Screen name="UserProfile" component={UserProfile} />
+      <Tab.Screen name="SpecificEvent" component={SpecificEvent}  />
       <Tab.Screen name="StackNav" component={StackNav} />
-
-
     </Tab.Navigator>
   );
 };
@@ -59,6 +55,7 @@ return(
          <stack.Screen name="UpdateEventPicture" component={UpdateEventPicture}/>
          <stack.Screen name="MentorProfile" component={MentorProfile}/>
          <stack.Screen name="StudentAttentEvent" component={StudentAttentEvent}/>
+         <stack.Screen name="UploadImages" component={UploadImages}/>
       <stack.Screen name="StackNav" component={StackNav} />
 
         </stack.Navigator>
@@ -94,6 +91,7 @@ return(
           <stack.Screen name="Events" component={Events} />
           <stack.Screen name="StudentView" component={StudentView} />
           <stack.Screen name="AddEvent" component={AddEvent} />
+          <stack.Screen name="EventGallery" component={EventGallery} />
           
           <stack.Screen name="PicProfile" component={PicProfile} />
           <stack.Screen name="StackNav" component={StackNav} />
